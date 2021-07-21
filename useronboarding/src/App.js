@@ -1,6 +1,7 @@
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Form from "./component/UserForm";
+import UserForm from "./component/UserForm";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           of the page
         </p>
       </div>
-      <Form />
+      <UserForm />
     </div>
   );
 }
