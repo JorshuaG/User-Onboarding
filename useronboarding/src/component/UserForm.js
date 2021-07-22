@@ -6,7 +6,7 @@ import { reach } from "yup";
 function UserForm(props) {
   const initialFormErrors = { name: "", email: "", password: "", terms: "" };
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setdisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,7 +15,10 @@ function UserForm(props) {
   });
 
   useEffect(() => {
-    formSchema.isValid(formData).then((valid) => setdisabled(!valid));
+    formSchema.isValid(formData).then((valid) => {
+      console.log(valid);
+      setDisabled(!valid);
+    });
   }, [formData]);
 
   const validate = (name, value) => {
@@ -36,7 +39,6 @@ function UserForm(props) {
     setFormData({ ...formData, [name]: value });
     validate(name, value);
   };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     axios.post("https://reqres.in/api/users", formData).then((resp) => {
@@ -88,7 +90,9 @@ function UserForm(props) {
           type="checkbox"
           onChange={(evt) => handleInput(evt)}
         ></input>
-        <button disabled={disabled}>Submit</button>
+        <button id="submitBtn" disabled={disabled ? true : ""}>
+          Submit
+        </button>
         <div>
           <div>{formErrors.name}</div>
           <div>{formErrors.email}</div>
