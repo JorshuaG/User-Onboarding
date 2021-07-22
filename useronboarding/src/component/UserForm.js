@@ -41,6 +41,13 @@ function UserForm(props) {
     evt.preventDefault();
     axios.post("https://reqres.in/api/users", formData).then((resp) => {
       console.log(resp.data);
+      props.addNewUser(resp.data);
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        terms: false,
+      });
     });
   };
 
@@ -82,7 +89,12 @@ function UserForm(props) {
           onChange={(evt) => handleInput(evt)}
         ></input>
         <button disabled={disabled}>Submit</button>
-        <div></div>
+        <div>
+          <div>{formErrors.name}</div>
+          <div>{formErrors.email}</div>
+          <div>{formErrors.password}</div>
+          <div>{formErrors.terms}</div>
+        </div>
       </div>
     </form>
   );

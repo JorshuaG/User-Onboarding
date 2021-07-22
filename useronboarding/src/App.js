@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import UserForm from "./component/UserForm";
+import UserCard from "./component/UserCard";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const addNewUser = (newUser) => {
+    setUsers([...users, newUser]);
+  };
+
   return (
     <div className="App">
       <div>
@@ -13,7 +19,10 @@ function App() {
           of the page
         </p>
       </div>
-      <UserForm />
+      <UserForm addNewUser={addNewUser} />
+      {users.map((member) => {
+        return <UserCard user={member} />;
+      })}
     </div>
   );
 }
