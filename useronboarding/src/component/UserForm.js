@@ -94,10 +94,10 @@ function UserForm(props) {
           Submit
         </button>
         <div>
-          <div>{formErrors.name}</div>
-          <div>{formErrors.email}</div>
-          <div>{formErrors.password}</div>
-          <div>{formErrors.terms}</div>
+          <div id="nameErrorMsg">{formErrors.name}</div>
+          <div id="emailErrorMsg">{formErrors.email}</div>
+          <div id="passwordErrorMsg">{formErrors.password}</div>
+          <div id="termsErrorMsg">{formErrors.terms}</div>
         </div>
       </div>
     </form>
