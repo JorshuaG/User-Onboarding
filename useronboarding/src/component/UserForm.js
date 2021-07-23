@@ -4,7 +4,12 @@ import formSchema from "./FormSchema";
 import { reach } from "yup";
 
 function UserForm(props) {
-  const initialFormErrors = { name: "", email: "", password: "", terms: "" };
+  const initialFormErrors = {
+    name: "",
+    email: "",
+    password: "",
+    terms: "",
+  };
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
@@ -16,7 +21,7 @@ function UserForm(props) {
 
   useEffect(() => {
     formSchema.isValid(formData).then((valid) => {
-      console.log(valid);
+      console.log("formschema", valid);
       setDisabled(!valid);
     });
   }, [formData]);
@@ -31,11 +36,8 @@ function UserForm(props) {
   const handleInput = (evt) => {
     const target = evt.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
+    console.log("for handleINput", typeof value);
     const name = target.name;
-    if (name === "terms") {
-      setFormData({ ...formData, terms: !formData.terms });
-      return validate("terms", formData.terms);
-    }
     setFormData({ ...formData, [name]: value });
     validate(name, value);
   };
@@ -90,7 +92,7 @@ function UserForm(props) {
           type="checkbox"
           onChange={(evt) => handleInput(evt)}
         ></input>
-        <button id="submitBtn" disabled={disabled ? true : ""}>
+        <button id="submitBtn" disabled={disabled}>
           Submit
         </button>
         <div>
